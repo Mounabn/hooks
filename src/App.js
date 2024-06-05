@@ -1,9 +1,10 @@
+
 import React, { useState } from "react";
 import MovieList from "./component/MovieList";
 import Filter from "./component/Filter";
-
+import MovieDetail from "./component/MovieDetail";
 import "./App.css";
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 const App = () => {
   const [movies, setMovies] = useState([
@@ -12,24 +13,30 @@ const App = () => {
       title: "The Wolf of Wall Street",
       description: "A mind-bending thriller",
       posterURL:
-        "https://m.media-amazon.com/images/S/pv-target-images/f9d536e603d73b15c291d209a1fd8c5dd9434d62a6a1e5c7fbf7e94c2cda513d.jpg",
+        "https://fr.web.img6.acsta.net/pictures/210/604/21060483_20131125114549726.jpg",
       rating: 4.5,
+      trailerLink:
+        "https://www.youtube.com/embed/Hgeu5rhoxxY?si=H5vkAhz2_j7b2SE8",
     },
     {
       id: 2,
       title: "Interstellar",
       description: "A space odyssey",
       posterURL:
-        "https://bibliosff.wordpress.com/wp-content/uploads/2022/07/interstellar-affiche-film.jpg",
+        "https://toutelaculture.com/wp-content/uploads/2014/11/interstellar3-691x1024.jpeg",
       rating: 4.7,
+      trailerLink:
+        "https://www.youtube.com/embed/zSWdZVtXT7E?si=WT5xghDLGpNH7wj5",
     },
     {
       id: 3,
       title: "Creed",
       description: "A fighter",
       posterURL:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZKqWUhp-VwkxkA3JwtsrIMdqOE1Img0k37g&s",
+        "https://dx35vtwkllhj9.cloudfront.net/united-artists-releasing/creed-iii/images/regions/us/onesheet.jpg",
       rating: 5,
+      trailerLink:
+        "https://www.youtube.com/embed/AHmCH7iB_IM?si=-wuVsigxnL37jW0d",
     },
   ]);
 
@@ -116,7 +123,16 @@ const App = () => {
   return (
     <div className="app">
       <h1>Movie Library</h1>
-      <Home />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/description/:id"
+            element={<MovieDetail movies={movies} />}
+          />
+          <Route path="*" element={"error 404 page not found"} />
+        </Routes>
+      </Router>
     </div>
   );
 };
